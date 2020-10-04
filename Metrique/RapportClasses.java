@@ -45,7 +45,7 @@ public class RapportClasses {
      * Titre des colonnes
      */
     public static String getHeader() {
-        return "chemin, class, classe_LOC, classe_CLOC, classe_DC";
+        return "chemin, class, classe_LOC, classe_CLOC, classe_DC, WMC, cBC";
     }
 
     @Override
