@@ -32,6 +32,13 @@ public class RapportClasses {
     private final int cCLOC;
 
     /**
+     * Densité de commentaires d'une classe : cDC = cCLOC / cLOC
+     */
+    private double getDC() {
+        return (double) cCLOC / cLOC;
+    }
+    
+    /**
      * Constructeur
      */
     public RapportClasses(String path, String className, int cLOC, int cCLOC, int jdLOC) {
@@ -45,7 +52,7 @@ public class RapportClasses {
      * Titre des colonnes
      */
     public static String getHeader() {
-        return "chemin, class, classe_LOC, classe_CLOC, classe_DC";
+        return "chemin, class, classe_LOC, classe_CLOC, classe_DC, WMC, classe_BC";
     }
 
     @Override
@@ -55,6 +62,7 @@ public class RapportClasses {
             add(className);
             add("" + cLOC);
             add("" + cCLOC);
+            add("" + getDC());
         }};
 
         return String.join(",", out);

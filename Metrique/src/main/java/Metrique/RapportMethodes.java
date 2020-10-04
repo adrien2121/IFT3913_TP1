@@ -43,6 +43,7 @@ public class RapportMethodes {
         return (double) mCLOC / mLOC;
     }
     
+    
     /**
      * Constructeur
      */
@@ -58,7 +59,7 @@ public class RapportMethodes {
      * Titre des colonnes
      */
     public static String getHeader() {
-        return "chemin, class, methode1, methode_LOC, methode_CLOC, methode_DC";
+        return "chemin, class, methode1, methode_LOC, methode_CLOC, methode_DC, CC, methode_BC";
     }
 
     @Override
