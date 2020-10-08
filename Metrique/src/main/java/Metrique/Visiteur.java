@@ -20,13 +20,13 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Date :   3 octobre 2020
  *
  * Visiteur pour un fichier Java.
- * Remplit les rapports dans le VisitorState (Classes et méthodes)
+ * Remplit les rapports dans le VisitorState (Classes et mï¿½thodes)
  * 
- * - Si on est dans une declaration de méthode :  on apelle le visiteur de méthode pour calculer le CC
- * - Si on est dans une ENUM : on n'a pas a calculer le WMC car il n'y a pas de noeud prédicat dans un Enum
+ * - Si on est dans une declaration de mï¿½thode :  on apelle le visiteur de mï¿½thode pour calculer le CC
+ * - Si on est dans une ENUM : on n'a pas a calculer le WMC car il n'y a pas de noeud prï¿½dicat dans un Enum
  * - Pour les classes ou interfaces, on apelle le Visiteur de classes afin de calculer son WMC
  * 
- * Les infos sont ensuite sauvegardés dans le VisitorState, afin de pouvoir créer les rapports.
+ * Les infos sont ensuite sauvegardï¿½s dans le VisitorState, afin de pouvoir crï¿½er les rapports.
  * 
  */
 public class Visiteur extends VoidVisitorAdapter<VisitorState> {
@@ -35,27 +35,28 @@ public class Visiteur extends VoidVisitorAdapter<VisitorState> {
     public void visit(MethodDeclaration method, VisitorState infos) {
         super.visit(method, infos);
 
-        // Ici on crée un compteur CC. En appelant le visiteurMethode, le compteur affichera le nombre de noeuds prédicats de cette méthode.
-        // Le visiteurMethode incrémente le compteur a chaque noeud prédicat qu'il trouve.
+        // Ici on crï¿½e un compteur CC. En appelant le visiteurMethode, le compteur affichera le nombre de noeuds prï¿½dicats de cette mï¿½thode.
+        // Le visiteurMethode incrï¿½mente le compteur a chaque noeud prï¿½dicat qu'il trouve.
         //
         var cc = new AtomicInteger(1);
         var ccVisiteur = new VisiteurMethode();
         ccVisiteur.visit(method, cc);
         
-        //Insere les informations de cette méthode dans l'objet rapport.
+        //Insere les informations de cette mï¿½thode dans l'objet rapport.
         var report = new RapportMethodes(
             infos.currentFilePath,
             getMethodParentPath(method),
             (method.getParameters().isEmpty()?method.getNameAsString():getMethodSignature(method.getSignature())),
             getNodeLineCount(method),
             getCommentLineCount(method),
-            getJavaDocCommentLineCount(method.getJavadocComment())
+            getJavaDocCommentLineCount(method.getJavadocComment()),
+            cc.get()
         );
         
         // Pour debug
         //System.out.println("M "+ infos.currentFilePath + " " + getMethodParentPath(method) + " " + (method.getParameters().isEmpty()?method.getNameAsString():getMethodSignature(method.getSignature())) + " " + getNodeLineCount(method) + " " + getCommentLineCount(method) + " " + getJavaDocCommentLineCount(method.getJavadocComment()) + " cc: " + cc.get());
         
-        //Ajoute le rapport de cette méthode a l'Array du VisitorState
+        //Ajoute le rapport de cette mï¿½thode a l'Array du VisitorState
         infos.rMethodes.add(report);
 
     }
@@ -89,7 +90,8 @@ public class Visiteur extends VoidVisitorAdapter<VisitorState> {
             className,
             getNodeLineCount(declaration),
             getCommentLineCount(declaration),
-            getJavaDocCommentLineCount(javadoc)
+            getJavaDocCommentLineCount(javadoc),
+            wmc
         );
         
         // Pour debug
@@ -101,7 +103,7 @@ public class Visiteur extends VoidVisitorAdapter<VisitorState> {
     }
     
     /**
-     * Nom du parent de la méthode
+     * Nom du parent de la mï¿½thode
      */
     public static String getMethodParentPath(MethodDeclaration method) {
         return method.getParentNode()
@@ -111,7 +113,7 @@ public class Visiteur extends VoidVisitorAdapter<VisitorState> {
     }
     
     /**
-     * Nom de la méthode avec signature
+     * Nom de la mï¿½thode avec signature
      */
     public static String getMethodSignature(Signature signature) {
     	

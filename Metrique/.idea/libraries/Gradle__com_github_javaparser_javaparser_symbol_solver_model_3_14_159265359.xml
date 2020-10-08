@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.javaparser:javaparser-symbol-solver-model:3.14.159265359">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.javaparser/javaparser-symbol-solver-model/3.14.159265359/f6fd03084cd687f861e8711efe9d2d887553c4cd/javaparser-symbol-solver-model-3.14.159265359.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.javaparser/javaparser-symbol-solver-model/3.14.159265359/2a8ae0f6111816bf291fbaf96c1b6ac79037b71b/javaparser-symbol-solver-model-3.14.159265359-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

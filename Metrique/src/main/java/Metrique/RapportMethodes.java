@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  * Date :   3 octobre 2020
  *
- * Objet servant pour la création du rapport des métriques pour les méthodes.
+ * Objet servant pour la crï¿½ation du rapport des mï¿½triques pour les mï¿½thodes.
  */
 public class RapportMethodes {
     /**
@@ -22,37 +22,48 @@ public class RapportMethodes {
     public final String parentPath;
 
     /**
-     * Nom de la méthode
+     * Nom de la mï¿½thode
      */
     public final String methodName;
 
     /**
-     * Nombre de lignes de code de la méthode
+     * Nombre de lignes de code de la mï¿½thode
      */
     public final int mLOC;
 
     /**
-     * Nombre de lignes de code de la méthode avec des commentaires
+     * Nombre de lignes de code de la mï¿½thode avec des commentaires
      */
     public final int mCLOC;
 
     /**
-     * Densité de commentaires d'une méthode :  DC = mCLOC / mLOC
+     * Densitï¿½ de commentaires d'une mï¿½thode :  DC = mCLOC / mLOC
      */
     private double getDC() {
         return (double) mCLOC / mLOC;
     }
-    
-    
+
+    /**
+     * Complexite cyclomatique de McCabe pour la methode
+     */
+    public final int CC;
+
+    /**
+     * Degre selon lequel une methode est bien commentee
+     */
+    private double getBC() {return (double) getDC() / CC; }
+
+
     /**
      * Constructeur
      */
-    public RapportMethodes(String path, String parentPath, String className, int mLOC, int mCLOC, int jdLOC) {
+    public RapportMethodes(String path, String parentPath, String className, int mLOC, int mCLOC, int jdLOC, int CC) {
         this.path = path;
         this.parentPath = parentPath;
         this.methodName = className;
         this.mLOC = mLOC + jdLOC;
         this.mCLOC = mCLOC + jdLOC;
+        this.CC = CC;
     }
 
     /**
@@ -72,6 +83,8 @@ public class RapportMethodes {
 	            add("" + mLOC);
 	            add("" + mCLOC);
 	            add("" + getDC());
+	            add("" + CC);
+	            add("" + getBC());
         	}
         };
         return String.join(",", out);

@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  * Date :   3 octobre 2020
  *
- * Objet servant pour la création du rapport des métriques pour les classes.
+ * Objet servant pour la crï¿½ation du rapport des mï¿½triques pour les classes.
  */
 public class RapportClasses {
     /**
@@ -32,20 +32,31 @@ public class RapportClasses {
     private final int cCLOC;
 
     /**
-     * Densité de commentaires d'une classe : cDC = cCLOC / cLOC
+     * Densitï¿½ de commentaires d'une classe : cDC = cCLOC / cLOC
      */
     private double getDC() {
         return (double) cCLOC / cLOC;
     }
-    
+
+    /**
+     * Somme ponderee des complexites des methodes dune classe
+     */
+    private final int wmc;
+
+    /**
+     * Degre selon lequel une classe est bien commentee
+     */
+    private double getBC() {return (double) getDC() / wmc; }
+
     /**
      * Constructeur
      */
-    public RapportClasses(String path, String className, int cLOC, int cCLOC, int jdLOC) {
+    public RapportClasses(String path, String className, int cLOC, int cCLOC, int jdLOC, int wmc) {
         this.path = path;
         this.className = className;
         this.cLOC = cLOC + jdLOC;
         this.cCLOC = cCLOC + jdLOC;
+        this.wmc = wmc;
     }
 
     /**
@@ -63,6 +74,8 @@ public class RapportClasses {
             add("" + cLOC);
             add("" + cCLOC);
             add("" + getDC());
+            add("" + wmc);
+            add("" + getBC());
         }};
 
         return String.join(",", out);
