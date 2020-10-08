@@ -34,6 +34,13 @@ public class Visiteur extends VoidVisitorAdapter<VisitorState> {
     @Override
     public void visit(MethodDeclaration method, VisitorState infos) {
         super.visit(method, infos);
+
+        // Ici on crée un compteur CC. En appelant le visiteurMethode, le compteur affichera le nombre de noeuds prédicats de cette méthode.
+        // Le visiteurMethode incrémente le compteur a chaque noeud prédicat qu'il trouve.
+        //
+        var cc = new AtomicInteger(1);
+        var ccVisiteur = new VisiteurMethode();
+        ccVisiteur.visit(method, cc);
         
         //Insere les informations de cette méthode dans l'objet rapport.
         var report = new RapportMethodes(
@@ -46,7 +53,7 @@ public class Visiteur extends VoidVisitorAdapter<VisitorState> {
         );
         
         // Pour debug
-        //System.out.println("M "+ infos.currentFilePath + " " + getMethodParentPath(method) + " " + (method.getParameters().isEmpty()?method.getNameAsString():getMethodSignature(method.getSignature())) + " " + getNodeLineCount(method) + " " + getCommentLineCount(method) + " " + getJavaDocCommentLineCount(method.getJavadocComment()));
+        //System.out.println("M "+ infos.currentFilePath + " " + getMethodParentPath(method) + " " + (method.getParameters().isEmpty()?method.getNameAsString():getMethodSignature(method.getSignature())) + " " + getNodeLineCount(method) + " " + getCommentLineCount(method) + " " + getJavaDocCommentLineCount(method.getJavadocComment()) + " cc: " + cc.get());
         
         //Ajoute le rapport de cette méthode a l'Array du VisitorState
         infos.rMethodes.add(report);
@@ -62,7 +69,11 @@ public class Visiteur extends VoidVisitorAdapter<VisitorState> {
     @Override
     public void visit(ClassOrInterfaceDeclaration dec, VisitorState infos) {
         super.visit(dec, infos);
-        visitClassLike(dec, infos, 0);
+        
+        //Ce visiteur fait la somme des CC pour cette classe.
+        var classVisiteur = new VisiteurClasse();
+        classVisiteur.visit(dec, infos);
+        visitClassLike(dec, infos, classVisiteur.getWMC());
         
     }
 
@@ -82,7 +93,7 @@ public class Visiteur extends VoidVisitorAdapter<VisitorState> {
         );
         
         // Pour debug
-        //System.out.println("C "+  infos.currentFilePath + " " + className + " " + getNodeLineCount(declaration) + " " + getCommentLineCount(declaration) + " " + getJavaDocCommentLineCount(javadoc));
+        //System.out.println("C "+  infos.currentFilePath + " " + className + " " + getNodeLineCount(declaration) + " " + getCommentLineCount(declaration) + " " + getJavaDocCommentLineCount(javadoc) + " wmc: " + wmc);
 
         //Ajoute le rapport de cette classe a l'Array du VisitorState
         infos.rClasses.add(report);
