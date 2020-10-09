@@ -1,0 +1,51 @@
+Méthodes à améliorer :
+
+	private double calculateValueNoINF(double log) dans le fichier src\main\java\org\jfree\chart\axis\LogAxis.java:
+
+		Aucun commentaire. Il serait bien de préciser ce que le paramètre log est et puis la valeur que la fonction retourne. 
+		De plus, il pourrait être judicieux d'expliquer pourquoi la variable result prend ses valeurs respectives quand on rentre dans les if statements 
+		car il est difficile de comprendre la methode à première vue sans commentaire. De plus, le programmeur pourrait metttre un @see calculateValue(double)
+		pour le javadoc de la methode.
+
+
+	public TickUnit getLargerTickUnit(TickUnit unit) dans le fichier src\main\java\org\jfree\chart\axis\NumberTIckUnitSource.java :
+		
+		Aucun commentaire également. Très difficile de comprendre la fonction. Pourrait faire de la javadoc pour la fonction précisant
+		le paramètre, la valeur de retour et mettre @see getCeilingTickUnit(TickUnit) et @see next(). Le statement if est simple à comprendre donc pas besoin
+		de commentaire pour celui-ci. Par contre, sans savoir ce que le paramètre unit est, on reste perplexe sur le statement. 
+		C'est pour cela que la javadoc sur le paramètre est important.
+
+
+	private Range trimToContentWidth(Range r) dans le fichier src\main\java\org\jfree\chart\block\AbstractBlock.java :
+	
+		Aucun commentaire non plus. Encore une fois, de la javadoc sur le paramètre Range r, la valeur de retour serait bienvenue. De plus,
+		mettre @see trimToContentWidth(double) pour la javadoc. Methode simple qui est difficile à comprendre sans les commentaires demandés 
+		dans la phrase précédente. Enfin, mettre un petit commentaire pour expliquer pourquoi il y a les 2 if statements aidera fortement pour
+		comprendre la méthode.
+
+
+
+
+
+
+Classes à améliorer :
+
+	static class NullLegendLabelGenerator dans le fichier src\test\java\org\jfree\chart\plot\PiePlotTest.java :
+
+		Pas de commentaire. Pourrait bénéficier d'un petit commentaire pour expliquer l'utilité de la classe et dans quels scénarios on devrait 
+		utiliser cette classe. On peut avoir une petite idée de ce que la classe peut faire avec son nom mais les commentaires sont nécessaires.
+
+
+	 private static class TestRenderer extends XYLineAndShapeRenderer dans le fichier src\test\java\org\jfree\chart\renderer\AbstractRendererTest.java :
+		
+		Difficile de comprendre la classe sans commentaire. Un petit javadoc qui explique en quoi cette classe est utile pour faire des tests sur 
+		AbstractRenderer serait très utile. De plus, expliquer dans quelles situation de test on instancie cette classe.
+
+		
+	public final class DatasetUtils dans le fichier src\main\java\org\jfree\data\general\DatasetUtils.java :
+	
+		Peu de commentaires. Pourrait mettre en commentaires pour avoir une idée generale quels sortes d'utils cette classe offre sans qu'on ait à 
+		parcourir tout le fichier pour trouver les utils. Il pourrait aussi avoir une petite section qui montre quels utils sont utiles pour quelles
+		classes.
+		
+	
