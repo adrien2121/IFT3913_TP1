@@ -13,7 +13,7 @@ class CurrencyTest {
 
 	//Test partie 2 : T2 (Couverture des instructions)
     @Test
-    void addition() {
+    void t2() {
         assertEquals(50.0, Currency.convert(100.0, 0.5));
     }
 
