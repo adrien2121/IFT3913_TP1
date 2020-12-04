@@ -13,7 +13,7 @@ import currencyConverter.MainWindow;
 class MainWindowTest {
 
 	private ArrayList<Currency> currencies = Currency.init();
-    int[]emptyArray = new int[0];
+	ArrayList<Currency> emptyArray = null;
 
 	//Test partie 2 : T1 (Couverture des instructions)
     @Test
@@ -33,8 +33,8 @@ class MainWindowTest {
     @Test
     void t4() {
         assertEquals(0, MainWindow.convert("US Dollar", "Euro", emptyArray, 100.0));
-        assertEquals(0, MainWindow.convert("Invalide", "Invalide", emptyArray, 100.0));
-        assertEquals(0, MainWindow.convert("Invalide", "Euro", emptyArray, 100.0));
+        assertEquals(0, MainWindow.convert("Invalide", "Invalide", currencies, 100.0));
+        assertEquals(0, MainWindow.convert("Invalide", "Euro", currencies, 100.0));
         assertEquals(0, MainWindow.convert("US Dollar", "Euro", currencies, 100.0));
     }
 
